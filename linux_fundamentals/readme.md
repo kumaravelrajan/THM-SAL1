@@ -62,11 +62,45 @@
     - `[Ctrl] + [R]`: Search through the command history.
 
 ## Working with files and directories
+1. `touch <name>`: Create empty file. 
 
+## Editing files
+1. /etc/passwd file: 
 
+    Really important file that contains essential information about the users on the system, such as their usernames, user IDs (UIDs), group IDs (GIDs), and home directories.
 
+    - Historically /etc/passwd also stored password hashes. However, now those hashes are typically stored in /etc/shadow which has stricter permissions. 
+
+    - If the permissions on /etc/passwd or other critical files are not set correctly, it may expose sensitive information or lead to privilege escalation opportunities.
+
+1. `vimtutor`: Command that opens a tutorial to vim editor. 
+
+## File descriptors and Redirections
+
+1. What are file descriptors?: 
+
+    A file descriptor in Linux is a non-negative integer that uniquely identifies an open file or other input/output resource (like a pipe, socket, or device) within a process. When a process opens a file or I/O resource, the Linux kernel assigns it a file descriptor and tracks it in a per-process file descriptor table. This integer acts as a handle that the process uses to perform operations such as reading, writing, or closing the resource.
+
+    By convention, every process starts with three standard file descriptors:
+
+    0: Standard input (stdin)
+
+    1: Standard output (stdout)
+
+    2: Standard error (stderr)
+
+    File descriptors are fundamental to how Linux manages all kinds of I/O, treating everything-from files to network connections-as files accessible through these integer handles.
+
+1. STDOUT and STDERR
+
+    ```
+    htb-student@nixfund:~$ find /etc -name shadow
+    find: ‘/etc/dovecot/private’: Permission denied #STDERR
+    /etc/shadow #STDOUT
+    find: ‘/etc/ssl/private’: Permission denied #STDERR
+    find: ‘/etc/polkit-1/localauthority’: Permission denied #STDERR
+
+    htb-student@nixfund:~$ find /etc -name shadow 2>/dev/null #Redirect STDERR to /dev/null i.e. discard data.
     
-
-
-
-    
+    /etc/shadow #STDOUT
+    ```
