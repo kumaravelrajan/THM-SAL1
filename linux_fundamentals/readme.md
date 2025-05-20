@@ -194,4 +194,77 @@
 
 1. Tr
 
+    Tr replaces certain characters from a line with characters defined by us.
+
+1. Practice questions:
+
+    The file we will need to work with is the /etc/passwd file on our target and we can use any shown command above. Our goal is to filter and display only specific contents. Read the file and filter its contents in such a way that we see only:
     
+    - A line with the username cry0l1t3.
+
+        `cat /etc/passwd | grep cry0l1t3`
+
+    - The usernames.
+    
+        `cat /etc/passwd | tr ":" " " | awk '{print $1}'`
+
+        tr replaces all colons with space. awk prints only the first column. 
+
+        Alternatively we can also do: 
+        
+        `cat /etc/passwd | cut -d":" -f1`. 
+
+        cut delimits lines based on colons and prints the first field alone. 
+
+    - The username cry0l1t3 and his UID.
+
+        `cat /etc/passwd | grep "cry0l1t3" | cut -d":" -f 1,3`
+
+    - The username cry0l1t3 and his UID separated by a comma (,)
+
+        `cat /etc/passwd | grep "cry0l1t3" | cut -d":" -f 1,3 | tr ":" ","`
+
+    - The username cry0l1t3, his UID, and the set shell separated by a comma (,).
+
+        `cat /etc/passwd | grep "cry0l1t3" | cut -d":" -f 1,3,7 | tr ":" ","`
+
+    -	All usernames with their UID and set shells separated by a comma (,).
+
+        `cat /etc/passwd | cut -d":" -f 3,7 | tr ":" ","`
+
+    -	All usernames with their UID and set shells separated by a comma (,) and exclude the ones that contain nologin or false.
+
+        `cat /etc/passwd | grep -v "false\|nologin" | cut -d":" -f 3,7 | tr ":" ","`
+
+
+    -	All usernames with their UID and set shells separated by a comma (,) and exclude the ones that contain nologin and count all lines of the filtered output.
+
+        `cat /etc/passwd | grep -v "nologin" | cut -d":" -f 3,7 | tr ":" "," | wc -l`
+
+1. Questions
+
+    1. How many services are listening on the target system on all interfaces? (Not on localhost and IPv4 only)
+
+        - Explaining the question:
+
+            The sentence “How many services are listening on the target system on all interfaces? (Not only on localhost and IPv4)” is asking you to determine the number of network services (programs or daemons) that are actively waiting for incoming connections on every network interface of the system, not just on the local interface or only using IPv4.
+
+            Breaking down the question:
+
+            Services listening: These are programs running on the system that are set up to accept network connections, such as web servers, SSH servers, or database servers. When a service is "listening," it means it is waiting for other computers to connect to it on a specific network port.
+
+            On all interfaces: A computer can have multiple network interfaces, such as ethernet, Wi-Fi, and the loopback interface (localhost). "All interfaces" means every network interface the system has, not just the local one used for internal communication.
+
+            Not only on localhost: The "localhost" (or 127.0.0.1 for IPv4, ::1 for IPv6) is a special network interface used for communication within the same machine. If a service is listening only on localhost, it cannot be accessed from other computers. The question is specifically asking about services that are accessible from outside the machine, i.e., those listening on all interfaces, not just localhost.
+
+            Not only IPv4: Computers can use both IPv4 and IPv6 addresses. The question wants you to consider both types of addresses, not just IPv4. So, you should also consider services listening on all IPv6 interfaces (for example, address [::]) as well as all IPv4 interfaces (address 0.0.0.0).
+
+            Summary:
+            The question is asking you to count how many services are configured to accept network connections from any computer, on any network interface (wired, wireless, etc.), and over both IPv4 and IPv6, not just those restricted to the local machine (localhost). It’s about identifying all services that are potentially reachable from outside the system, not just those accessible internally.
+
+        - Solution:
+
+            
+
+
+        
