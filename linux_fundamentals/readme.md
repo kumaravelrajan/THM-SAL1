@@ -247,24 +247,69 @@
 
         - Explaining the question:
 
-            The sentence “How many services are listening on the target system on all interfaces? (Not only on localhost and IPv4)” is asking you to determine the number of network services (programs or daemons) that are actively waiting for incoming connections on every network interface of the system, not just on the local interface or only using IPv4.
+            Key Terms Explained: 
+            1. Services
 
-            Breaking down the question:
+            In Linux, a service is a program or process that runs in the background and provides some functionality, often over a network. Common examples include web servers (like Apache), SSH servers, and FTP servers.
 
-            Services listening: These are programs running on the system that are set up to accept network connections, such as web servers, SSH servers, or database servers. When a service is "listening," it means it is waiting for other computers to connect to it on a specific network port.
+            2. Listening
 
-            On all interfaces: A computer can have multiple network interfaces, such as ethernet, Wi-Fi, and the loopback interface (localhost). "All interfaces" means every network interface the system has, not just the local one used for internal communication.
+            When a service is listening, it means it is waiting for incoming network connections on a specific port. Think of it as a receptionist waiting for phone calls on a certain phone line.
 
-            Not only on localhost: The "localhost" (or 127.0.0.1 for IPv4, ::1 for IPv6) is a special network interface used for communication within the same machine. If a service is listening only on localhost, it cannot be accessed from other computers. The question is specifically asking about services that are accessible from outside the machine, i.e., those listening on all interfaces, not just localhost.
+            3. Target System
 
-            Not only IPv4: Computers can use both IPv4 and IPv6 addresses. The question wants you to consider both types of addresses, not just IPv4. So, you should also consider services listening on all IPv6 interfaces (for example, address [::]) as well as all IPv4 interfaces (address 0.0.0.0).
+            This refers to the computer or server you are checking. It's the machine whose network services you want to inspect.
 
-            Summary:
-            The question is asking you to count how many services are configured to accept network connections from any computer, on any network interface (wired, wireless, etc.), and over both IPv4 and IPv6, not just those restricted to the local machine (localhost). It’s about identifying all services that are potentially reachable from outside the system, not just those accessible internally.
+            4. All Interfaces
 
+            A network interface is like a doorway for network traffic on your computer (e.g., Ethernet, Wi-Fi). When a service is listening on all interfaces, it means it will accept connections from any network source, not just from itself or a specific network card. In technical terms, this is often represented by the IP address 0.0.0.0 for IPv4.
+
+            5. Not on localhost
+
+            localhost is a special network address (127.0.0.1 for IPv4) that refers to the computer itself. If a service is listening only on localhost, it can only be accessed from the same machine, not from other computers on the network. The question specifically wants to exclude these.
+
+            6. IPv4 only
+
+            IPv4 is one version of the Internet Protocol, using addresses like 192.168.1.1. The question wants to count only services listening for IPv4 connections, not the newer IPv6 (which uses addresses like ::1).
+            
+        - What is the question asking?
+
+            The question is asking:
+
+            On the target Linux system, how many different services (programs) are currently set up to accept network connections from anywhere (not just from itself), using IPv4 addresses?
+
+            In other words, if you were on another computer in the same network, how many different services could you try to connect to on this system, using IPv4?
+        
         - Solution:
 
+            `ss -l -4 | grep -v "127\.0\.0" | grep "LISTEN" | wc -l`
+
+    1. Determine what user the ProFTPd server is running under. Submit the username as the answer.
+
+        - Solution: 
+
+            `ps aux | grep proftpd`
+
+            - ps: Stands for "process status" and is used to list running processes.
+
+            - aux: These are grouped BSD-style options:
+
+                - a: Shows processes for all users, not just those belonging to the current user.
+
+                - u: Displays the process's user/owner and shows output in a user-oriented format, including extra columns like CPU and memory usage.
+
+                - x: Includes processes that are not attached to a terminal (i.e., background services and daemons)
+
             
+        - Do processes run under a username?
+
+            Yes, every Linux process runs under a specific username, which determines its permissions and access rights on the system. When a user starts a process, that process inherits the user's identity, known as the effective user ID (UID), and runs with the same permissions as that user. This means the process can access files, resources, and perform actions allowed by that user's account.
+
+            This user-based ownership applies to all processes, including system services and background daemons, which often run under dedicated or restricted user accounts to limit their access for security reasons.
+
+    1. Use cURL from your Pwnbox (not the target machine) to obtain the source code of the "https://www.inlanefreight.com" website and filter all unique paths (https://www.inlanefreight.com/directory" or "/another/directory") of that domain. Submit the number of these paths as the answer.
+
+        - ktodo
 
 
-        
+## Regular Expressions
