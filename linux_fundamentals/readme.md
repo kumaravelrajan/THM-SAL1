@@ -309,7 +309,107 @@
 
     1. Use cURL from your Pwnbox (not the target machine) to obtain the source code of the "https://www.inlanefreight.com" website and filter all unique paths (https://www.inlanefreight.com/directory" or "/another/directory") of that domain. Submit the number of these paths as the answer.
 
-        - ktodo
+        - `curl https://www.inlanefreight.com | tr " " “\n” | cut -d"‘" -f2 | cut -d’"’ -f2 | grep www.inlanefreight.com | sort -u | wc -l`
 
 
 ## Regular Expressions
+- Practice questions
+
+    - Show all lines that do not contain the # character.
+
+        `grep -v "#" /etc/ssh/sshd_config`
+
+    - Search for all lines that contain a word that starts with Permit.
+
+        `grep -Ei '\bPermit\w*' /etc/ssh/sshd_config`
+
+        Output:
+        ```
+        #PermitRootLogin prohibit-password
+        #PermitEmptyPasswords no
+        # the setting of "PermitRootLogin prohibit-password".
+        #PermitTTY yes
+        #PermitUserEnvironment no
+        #PermitTunnel no
+        #	PermitTTY no
+        ```
+
+        The command is able to match successfully because \b means word boundary i.e. "Permit" should be at the start of a word boundary. 
+
+        The \b anchor matches a position where a "word character" (letters, digits, or underscore) is next to a "non-word character" (anything else, such as whitespace, punctuation, or the start/end of a line). 
+        
+        In your example, the # character is a non-word character, and the P in Permit is a word character. 
+        
+        The boundary between # and P is thus a word boundary, so \bPermit matches at that position.
+
+        \w matches a word character (letters, digits, or underscore).
+
+    - Search for all lines that contain a word ending with "Authentication".
+
+        `grep -Ei "\w*Authentication\b" /etc/ssh/sshd_config`
+
+    - Search for all lines containing the word Key.
+
+        `grep -i "key" /etc/ssh/sshd_config`
+
+    - Search for all lines beginning with Password and containing yes.
+
+        `cat /etc/ssh/sshd_config | grep -iE "^\W*password.*yes.*"`
+
+        \w is for word characters. \W is for non-word characters.
+
+        OUTPUT:
+        `#PasswordAuthentication yes`
+
+    - Search for all lines that end with "yes".
+
+        `cat /etc/ssh/sshd_config | grep -iE "yes$"`
+
+## Permission management
+
+- To "traverse" or navigate into a directory, the user must first have the right key—this key is the _execute_ permission on the directory. Without it, even if the contents of the directory are visible to the user, they won't be able to enter or move through it.
+
+    The _execute_ permission doesn't allow you to see or modify what's inside, but it does grant you the ability to step inside and explore the directory's structure. Without this permission, the user cannot access the directory's contents and will instead be presented with a “Permission Denied" error message.
+
+- Execute permission on a directory vs executing a file in the directory.
+
+    It is important to note that execute permissions are necessary to traverse a directory, no matter the user's level of access. Also, execute permissions on a directory do not allow a user to execute or modify any files or contents within the directory, only to traverse and access the content of the directory.
+
+    To execute files within the directory, a user needs execute permissions on the corresponding file. To modify the contents of a directory (create, delete, or rename files and subdirectories), the user needs write permissions on the directory.
+
+- The permission system in Linux systems
+
+    - Based on the Octal number system. There are three different types of permissions a file or directory can be assigned: read (r), write (w) and execute (x).
+
+    - `chmod` - change permissions.
+
+    - `chown` - change owner.
+
+    - SUID & SGID:
+
+        The Set User ID (SUID) and Set Group ID (SGID) bits function like temporary access passes, enabling users to run certain programs with the privileges of another user or group. For example, administrators can use SUID or SGID to grant users elevated rights for specific applications, allowing tasks to be performed with the necessary permissions, even if the user themselves doesn’t normally have them. The presence of these permissions is indicated by an _s_ in place of the usual x in the file's permission set.
+
+        
+# System management
+## User management
+- /etc/shadow file is a critical system file that stores encrypted password information for all user accounts.
+
+- sudo command
+
+    To perform tasks that require elevated privileges, users can utilize the sudo command. The sudo command, short for "superuser do," allows permitted users to execute commands with the security privileges of another user, typically the superuser or root.
+
+- Questions
+    - Which option needs to be set to create a home directory for a new user using "useradd" command?
+
+        -m
+
+    - Which option needs to be set to lock a user account using the "usermod" command? (long version of the option)
+
+        --lock
+
+    - Which option needs to be set to execute a command as a different user using the "su" command? (long version of the option)
+
+        --command
+
+## Package management
+
