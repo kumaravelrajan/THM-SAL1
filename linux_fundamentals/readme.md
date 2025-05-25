@@ -413,3 +413,127 @@
 
 ## Package management
 
+- Different package management programs
+
+    - dpkg: For Debian packages. 
+    - apt: High level command line interface to the package manager.
+    - aptitude: Alternative to apt. Also a high-level command line interface to the package manager. 
+    - gem: Package manager for Ruby. 
+    - pip: For python packages. 
+    - git
+
+- Advanced package manager (APT)
+
+    APT (Advanced Package Tool) and DPKG (Debian Package Manager) are interconnected components of Debian-based Linux package management systems. APT acts as a high-level front-end that leverages DPKG's low-level functionality while adding critical features like dependency resolution and repository management.
+
+    - DPKG
+    
+        - Installs, removes, and queries individual .deb packages.
+        
+        - Operates at a low level without handling dependencies automatically.
+        
+        - Example command: dpkg -i package.deb (installs a local .deb file).
+
+    - APT
+
+        - Manages dependencies, retrieves packages from repositories, and upgrades systems.
+
+        - Uses DPKG internally to perform package installations/removals.
+
+        - Example command: apt install package (resolves dependencies and uses DPKG).
+
+    Linux gets its software from online repositories. These repositories can be stable, testing, or unstable. Most systems use stable repositories for safety. You can see which repositories you use by looking at /etc/apt/sources.list.
+
+## Service and Process Management
+
+- What are services / daemons?
+
+    Services, also known as daemons, are fundamental components of a Linux system that run silently in the background "without direct user interaction". They perform crucial tasks that keep the system operational and provide additional functionalities.
+
+- Types of services
+
+    - System Services
+
+    - User-Installed Services
+
+- Identifying daemons
+
+    Daemons are often identified by the letter d at the end of their program names, such as sshd (SSH daemon) or systemd.
+
+- systemd, PIDs and PPIDs
+
+    - systemd: 
+    
+        Most modern Linux distributions have adopted systemd as their initialization system (init system). It is the first process that starts during the boot process and is assigned the Process ID (PID).
+
+        - systemctl and systemd
+
+            Systemctl is a command-line utility used to interact with and manage systemd, the system and service manager in Linux operating systems. It serves as the primary tool for controlling system services, units, and the overall system state. Systemd itself is responsible for initializing the system during boot and managing running services and daemons throughout the system's operation.
+
+    - PIDs & PPIDs:
+        All processes in a Linux system are assigned a PID and can be viewed under the /proc/ directory, which contains information about each process. ProcessA maybe created by ProcessB which means ProcessA is the parent of ProcessB. ProcessA would have a parent PID (PPID).
+
+    - Run a service after startup using systemctl
+        `systemctl enable ssh`
+
+- Kill a process
+
+    A process can be in the following states: Running, Waiting (waiting for an event or system resource), Stopped, Zombie (stopped but still has an entry in the process table).
+
+    Processes can be controlled using kill, pkill, pgrep, and killall. To interact with a process, we must send a signal to it. We can view all signals with the following command: `kill -l`.
+
+- Backgrounding and foregrounding a process
+
+    Processes can be sent to the background (pressing Ctrl+Z) or to the foreground (fg command).
+
+- Execute Multiple Commands
+
+    There are three possibilities to run several commands, one after the other. These are separated by: 
+    
+    -   Semicolon (\;)
+    -   Double ampersand characters (&&)
+    -   Pipes (|)
+
+- Question
+
+    1. Use the "systemctl" command to list all units of services and submit the unit name with the description "Load AppArmor profiles managed internally by snapd" as the answer.
+
+        `systemctl list-units --all | grep "Load AppArmor"`
+
+## Task scheduling
+
+We can automatically schedule tasks in Linux to run at the end of a timer or at regular intervals automatically. We use systemd for this. 
+
+There are three steps in this: 
+- Create a timer (schedules when your mytimer.service should run)
+- Create a service (executes the commands or script)
+- Activate the timer
+
+Systemd and Cron are both tools that can be used in Linux systems to schedule and automate processes. The key difference between these two tools is how they are configured. With Systemd, you need to create a timer and services script that tells the operating system when to run the tasks. On the other hand, with Cron, you need to create a crontab file that tells the cron daemon when to run the tasks.
+
+## Network Services
+
+- SSH
+    Secure Shell (SSH) is a network protocol that allows the secure transmission of data and commands over a network. It is widely used to securely manage remote systems and securely access remote systems to execute commands or transfer files. In order to connect to our or a remote Linux host via SSH, a corresponding SSH server must be available and running.
+
+- Network File System (NFS)
+
+    Network File System (NFS) is a network protocol that allows us to store and manage files on remote systems as if they were stored on the local system. It enables easy and efficient management of files across networks. For example, administrators use NFS to store and manage files centrally (for Linux and Windows systems) to enable easy collaboration and management of data. 
+
+    - `/etc/exports`
+
+        /etc/exports is the main configuration file for NFS exports on Linux.
+
+        Each line defines a directory to share, the clients allowed to access it, and the permissions/options for each client.
+
+        Example line:
+
+        `/shared/directory client1(options) client2(options)`
+
+    - Server and client roles
+
+        The server mentions the directory it intends to share with the client in /etc/exports. Included in this are dir name, client hostname/IP, access rights.
+
+        The client is responsible for mounting the shared (exported) directories. This process makes the remote directory appear as part of the local filesystem on the client machine.
+
+    
