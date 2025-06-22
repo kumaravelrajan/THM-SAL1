@@ -514,7 +514,7 @@ Systemd and Cron are both tools that can be used in Linux systems to schedule an
 ## Network Services
 
 - SSH
-    Secure Shell (SSH) is a network protocol that allows the secure transmission of data and commands over a network. It is widely used to securely manage remote systems and securely access remote systems to execute commands or transfer files. In order to connect to our or a remote Linux host via SSH, a corresponding SSH server must be available and running.
+    Secure Shell (SSH) is a network protocol that allows the secure transmission of data and commands over a network. It is widely used to securely manage remote systems and securely access remote systems to execute commands or transfer files. In order to connect to our or a remote Linux host via SSH, a corresponding SSH server (software) must be available and running.
 
 - Network File System (NFS)
 
@@ -535,5 +535,7 @@ Systemd and Cron are both tools that can be used in Linux systems to schedule an
         The server mentions the directory it intends to share with the client in /etc/exports. Included in this are dir name, client hostname/IP, access rights.
 
         The client is responsible for mounting the shared (exported) directories. This process makes the remote directory appear as part of the local filesystem on the client machine.
+
+- 
 
     
