@@ -57,5 +57,46 @@ DHCP servers allow newly joining host devices to get an IP address automatically
 
     The MAC address is the address burnt into the Network Interface Card (NIC) of the remote system by the NIC manufacturer. It cannot be changed but can be spoofed. 
 
-1. 
+1. Network layer
 
+    Everything is dealt with using IP addresses. Routers also deal with IP addresses. 
+
+1. Transport layer
+
+    TCP/UDP layer. Deals with ports. 
+
+1. Session layer
+
+    Once data has been correctly translated or formatted from the presentation layer (layer 6), the session layer (layer 5) will begin to create and maintain the connection to other computer for which the data is destined. When a connection is established, a session is created. Whilst this connection is active, so is the session.
+
+1. Presentation
+
+    Protocols such as HTTPS. 
+
+1. Application layer
+
+    Everyday applications such as email clients, browsers, or file server browsing software such as FileZilla provide a friendly, Graphical User Interface (GUI) for users to interact with data sent or received. Other protocols include DNS (Domain Name System), which is how website addresses are translated into IP addresses.
+
+## Packets and Frames
+
+- Packets vs Frames
+
+    - Frames are at level 2 while packets are at level 3. Packets are encapsulated within frames i.e. the frame forms a outer shell around the packet. 
+
+        When a frame arrives at a device (such as a router), the device checks the destination MAC address. If the device is the intended recipient (e.g., the router is the next hop), it strips off the Layer 2 frame (decapsulation) and processes the Layer 3 packet.
+
+        The router then determines where to forward the packet next. Before sending it out another interface, the router re-encapsulates the packet in a new Layer 2 frame appropriate for the next link, with new source and destination MAC addresses.
+
+        This process repeats at each hop: the frame is decapsulated and re-encapsulated at every Layer 3 device (router) until the packet reaches its final destination.
+
+- TCP three way handshake
+
+    - Source Port
+    
+        This value is the port opened by the sender to send the TCP packet from. This value is chosen randomly (out of the ports from 0-65535 that aren't already in use at the time).
+
+    - Destination Port
+    
+        This value is the port number that an application or service is running on the remote host (the one receiving data); for example, a webserver running on port 80. **Unlike the source port, this value is not chosen at random.**
+
+    - 
