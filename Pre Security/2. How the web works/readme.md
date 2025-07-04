@@ -1,4 +1,4 @@
-# DNS in detail
+# Room 1 - DNS in detail
 
 - Translates website names to IP addresses. 
 
@@ -33,7 +33,7 @@
 
 Client <-> Recursive DNS server (usually provided by ISP) -> Root DNS server (.) -> TLD (.com) -> Authoritative server (OR name server) which has accurate DNS records for the requested domain.
 
-# HTTP in detail
+# Room 2 - HTTP in detail
 
 ## Requests and responses
 
@@ -56,4 +56,41 @@ Client <-> Recursive DNS server (usually provided by ISP) -> Root DNS server (.)
     1. Line 1 indicates that GET method is used to get home page (/) and we tell the web server that HTTP protocol version 1.1 is being used. 
 
 ## HTTP methods
+
+HTTP methods are a way for the client (browser) to show their intended action when making an HTTP request.
+
+1. GET - get information from web server.
+1. POST - submit data to web server and create new records. 
+1. PUT - submit data to web server to update information. 
+1. DELETE
+
+## HEADERS
+
+### Common request headers
+
+1. Host: Some web servers host multiple websites so by providing the host headers you can tell it which one you require, otherwise you'll just receive the default website for the server.
+
+1. Content-Length: When sending data to a web server such as in a form, the content length tells the web server how much data to expect in the web request. 
+
+1. Cookie: Data sent to the server to help remember your information.
+
+### Common response headers
+
+1. Set-Cookie: Information to store which gets sent back to the web server on each request.
+
+## Cookies
+
+Because HTTP is stateless (doesn't keep track of your previous requests), cookies can be used to remind the web server who you are.
+
+1. Web server first sends cookie value in set-cookie header to browser and browser stores this. 
+1. In every request made by the browser to the web server, the browser sends the cookie value inside the cookie header.
+
+# Room 3 - How websites work
+
+## How websites work
+
+There are two major components that make up a website:
+
+1. Front End (Client-Side) - the way your browser renders a website.
+1. Back End (Server-Side) - a server that processes your request and returns a response.
 
