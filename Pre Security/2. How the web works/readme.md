@@ -94,3 +94,76 @@ There are two major components that make up a website:
 1. Front End (Client-Side) - the way your browser renders a website.
 1. Back End (Server-Side) - a server that processes your request and returns a response.
 
+## HTML injection
+
+![HTML injection](images/html-injection.svg)
+
+No user input sanitization leads to this outcome. 
+
+The image above shows how a form outputs text to the page. Whatever the user inputs into the "What's your name" field is passed to a JavaScript function and output to the page, which means if the user adds their own HTML or JavaScript in the field, it's used in the sayHi function and is added to the page - this means you can add your own HTML (such as a \<h1> tag) and it will output your input as pure HTML.
+
+The general rule is never to trust user input. To prevent malicious input, the website developer should sanitise everything the user enters before using it in the JavaScript function; in this case, the developer could remove any HTML tags.
+
+# Room 4 - Putting it all together
+
+## High level overview of how a webpage is viewed
+
+1. Client gets IP address of target web server from DNS.
+
+1. Client sends HTTP request to web server.
+
+1. Web server gives HTTP response. 
+
+1. Client browser interprets the received HTTP response and displays webpage. 
+
+## Other components that aid working of web
+
+1. WAF (Web Application Firewall)
+
+    ![WAF](images/WAF.svg)
+
+    Main aim is to protect the web server from DoS, DDoS attacks and in general any harm. 
+
+## How web servers work
+
+### What is a web server
+
+Web server is a software listening for incoming connections and then utilises the HTTP protocol to deliver web content to its clients. The **most common web server software you'll come across is Apache, Nginx, IIS and NodeJS**. A Web server delivers files from what's called its root directory, which is defined in the software settings.
+
+### Virtual hosts
+
+Web servers can host multiple websites with different domain names; to achieve this, they use virtual hosts. 
+
+The web server software checks the hostname being requested from the HTTP Request headers and matches that against its virtual hosts (virtual hosts are just text-based configuration files). If it finds a match, the correct website will be provided. If no match is found, the default website will be provided instead.
+
+Virtual Hosts can have their root directory mapped to different locations on the hard drive. For example, one.com being mapped to /var/www/website_one, and two.com being mapped to /var/www/website_two
+
+There's no limit to the number of different websites you can host on a web server.
+
+### Static Vs Dynamic Content
+
+1. Static content - 
+
+    Never changes. These files are served directly from web server with no changes. 
+
+1. Dynamic content - 
+
+    Content that changes with different requests. Imagine searching a blog site with certain keywords. As you change the keywords being searched for, the displayed content also changes. This is hence dynamic content. 
+
+    These changes are done in the backend.  You can't view the websites' HTML source and see what's happening in the Backend, while the HTML is the result of the processing from the Backend.
+
+    Dynamic content has two types:
+
+    1. Traditional (Server-rendered) Approach:
+
+        Using PHP for example. Consider the blog website searching functionality. In server-rendered approach, every new search sends a brand new request to the web server, the backend processes the request and sends a HTML page in response. 
+
+    1. Modern (Client-rendered or SPA) Approach:
+
+        Using JS frameworks like React, Angular etc. In these cases, when you change keywords the browser sends an AJAX request (such as a fetch or XMLHttpRequest) to the backend server with the new keywords.
+
+        **The server responds with data only (usually in JSON format), not a full HTML page.**
+
+        The frontend JavaScript code then updates the visible content by modifying the DOM, often without a full page reload or receiving a new HTML page from the server.
+
+
