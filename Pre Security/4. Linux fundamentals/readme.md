@@ -112,6 +112,47 @@ Example permissions
 
 ## Common directories
 
+![linux file structure](images/linux-file-structure.png)
+
+1. etc/
+
+    Common place to store system files used by operating system. 
+
+    Some notable contents of /etc
+    
+    1. passwd, shadow
+
+        says how user password are stored in sha512 encrypted formatting.
+    
+    1. sudoers, sudoers.d
+
+        list of users who can act as root. 
+
+1. var/
+
+    short for variable data. This folder stores data that is frequently accessed or written by services or applications running on the system. For example, log files from running services and applications are written here (/var/log)
+
+1. tmp/
+
+    This is a unique root directory found on a Linux install. Short for "temporary", the /tmp directory is volatile and is used to store data that is only needed to be accessed once or twice.
+
+    Once computer restarted, this folder is cleared out similar to computer memory. 
+
+    **What's useful for us in pentesting is that any user can write to this folder by default. Meaning once we have access to a machine, it serves as a good place to store things like our enumeration scripts.**
+
+# Room 3 - Linux fundamentals part 3
+
+## General / useful utilities
+
+1. SCP (secure copy)
+
+    `scp important.txt ubuntu@192.168.1.30:/home/ubuntu/transferred.txt`
+
+    Transfer important.txt from local machine to user "ubuntu" in remote machine with IP address 192.168.1.30 in the path /home/ubuntu and rename important.txt as transferred.txt in remote machine. 
+
+    For this it is important to know login details of a user in local and remote machine. 
+
+## Processes 101
 
 
 
