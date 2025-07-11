@@ -41,3 +41,78 @@
     In the previous example we overwrote a welcome file with content "hey". We can append to this file the word "hello" using the >> operator. 
 
     ![double redirection operator](images/double-redirection-operator.png)
+
+# Room 2 - Linux Fundamentals part 2
+
+## Intro to flags and switches
+
+1. **Switch / flag**
+
+    In `ls -a`, -a is called switch / flag since it switches on a certain behavior. 
+
+1. **Options** and **argument** for switches / flags
+
+    Occasionally, a flag may require an additional value (e.g., -o filename), in which case the value is called an argument to that flag (here, filename).
+
+    The flag along with the argument are collectively sometimes called options. 
+
+    In practice though all these terms are used interchangeably.
+
+1. The contents displayed on using the `--help` flag are usually a formatted output of the man pages of the respective commands. 
+
+## Filesystem interaction continue
+
+1. mv command to rename files or folders
+
+    `mv note2 note3`
+
+    This renames note2 to note3. 
+
+1. `file` command determines file type.
+
+    ![file command](images/file-cmd.png)
+
+## Permissions 101
+
+Example permissions
+
+![Permission](images/permissions.png)
+
+1. understanding output of `ls -l`
+
+    `drwxr-xr-x  2  root  root  4096  Oct  9  2011  xml`
+
+    - 1st column (File type and permissions):
+
+        The first character indicates the type (d for directory, - for regular file, l for symlink, etc.). The next nine characters show permissions for owner, group, and others (e.g., rwxr-xr-x means read/write/execute for owner, read/execute for group, read/execute for others).
+
+    - 2nd column (Number of links):
+
+        Shows how many hard links point to the file or directory. For directories, this is at least 2 (the directory itself and its parent), plus one for each subdirectory.
+
+    - 3rd column (Owner):
+
+        The username of the file’s owner (here, root).
+
+    - 4th column (Group):
+
+        The group that owns the file (here, root).
+
+    - 5th column (Size):
+
+        The file size in bytes. For directories, this is the size of the directory entry itself, not the contents.
+
+    - 6th–8th columns (Modification date and time):
+
+        The last modification date and time (e.g., Oct 9 2011).
+
+    - 9th column (File or directory name):
+
+        The actual name of the file or directory (here, xml).
+
+## Common directories
+
+
+
+
+
