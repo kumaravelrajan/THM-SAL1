@@ -154,6 +154,59 @@ Example permissions
 
 ## Processes 101
 
+Processes are programs running on your machine. They are managed by the kernel, where each process will have an ID associated with it, also known as its PID. The PID increments for the order In which the process starts. I.e. the 60th process will have a PID of 60.
+
+1. `ps`
+
+    ps command without options usually shows only the processes associated with the current terminal session—which are usually processes started by the current user in that session.
+
+1. `ps aux`
+
+    Shows all processes for all users. 
+
+1. `kill 1337` - kills process with PID 1337.
+
+1. Getting Processes/Services to Start on Boot
+
+    systemctl is the command line tool used to interact with systemd process.
+
+    `systemctl start apache2` starts apache2 process immediately in the background. 
+
+    `systemctl enable apache2` starts apache2 at boot.
+
+1. An Introduction to Backgrounding and Foregrounding in Linux
+
+    1. Methods to background a process
+
+        1. Add an ampersand (&) to the end of your command. This starts the command as a background process, so your terminal remains usable
+
+            ![background-process](images/background-process.png)
+
+        1. Ctrl + Z
+
+            Suspend a running foreground process with Ctrl+Z, then use bg to resume it in the background:
+
+            - Press Ctrl+Z to pause (suspend) the process.
+
+            - Type bg and press Enter to continue the process in the background.
+
+    1. Foreground a process
+
+        `fg` command.
+
+## Maintaining Your System: Automation (cron and crontabs)
+
+`cron` is a system process that runs repetitive tasks mentioned in the `crontab` file. Each user can have their own crontab file or there also exists a system wide crontab file. 
+
+`crontab -e` is how you edit the crontabs file. 
+
+Format of a crontab is as mentioned below: 
+
+![crontab-format](images/crontab-format.png)
+
+Example: `0 */12 * * * cp -R /home/cmnatic/Documents /var/backups/` copies documents directory to /var/backups every 12 hours. 
+
+## Package management
 
 
 
