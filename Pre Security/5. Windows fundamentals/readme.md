@@ -34,7 +34,35 @@
 
     1. Checking permissions of a folder
 
-        ![alt text](windows-folder-permissions.png)
+        ![alt text](images/windows-folder-permissions.png)
 
 ## The Windows\System32 Folders
+
+The Windows folder ( C:\Windows ) is traditionally known as the folder which contains the Windows operating system. 
+
+The folder doesn't have to reside in the C drive necessarily. It can reside in any other drive and technically can reside in a different folder.
+
+This is where environment variables, more specifically system environment variables, come into play.  Even though not discussed yet, the system  environment variable for the Windows directory is `%windir%`.
+
+The System32 folder within windows is perhaps the most important. 
+
+![alt text](images/windows-system32.png)
+
+The System32 folder holds the important files that are critical for the operating system.
+
+You should proceed with extreme caution when interacting with this folder. Accidentally deleting any files or folders within System32 can render the Windows OS inoperational.
+
+Many of the tools that will be covered in the Windows Fundamentals series reside within the System32 folder. 
+
+## User accounts, profiles, permissions
+
+User accounts can be one of two types on a typical local Windows system: Administrator & Standard User.
+
+`Start menu > other users` gives list of all users added to the system apart from the admin. 
+
+If you are the admin you see an option to add a new user. If you click on this you are taken to the local user and group manager dialog box. Here, all groups and users are listed. 
+
+Another way to open local user and group manager is `Win + R > lusrmgr.msc`.
+
+![alt text](images/lusrmgr.png)
 
