@@ -66,3 +66,17 @@ Another way to open local user and group manager is `Win + R > lusrmgr.msc`.
 
 ![alt text](images/lusrmgr.png)
 
+## User account control (UAC)
+
+1. You are logged in as local admin. 
+1. Wireshark installation shows permissions for admin but not for standard user.
+
+    ![alt text](images/win-wireshark.png)
+
+1. Login as the standard user remotely. 
+1. Shield icon appears in wireshark installation.
+
+    ![alt text](images/win-wireshark2.png)
+
+1. When standard user attempts to install wireshark it is prompted to enter administrator password. This is UAC.
+
