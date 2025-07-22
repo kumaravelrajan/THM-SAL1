@@ -16,3 +16,5 @@ Notice the **Selected command** section. The information in this textbox will ch
 
 To run a tool, we can use the command to launch the tool via the run prompt, command prompt, or by clicking the `Launch` button. 
 
+# Change UAC settings
+
